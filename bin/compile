@@ -20,17 +20,19 @@ if [ ! -d $SCALA_HOME ]; then
   exit 1
 fi
 
-$SCALA_HOME/bin/compile $1 $2
-if [ "$?" != "0" ]; then
-  echo "scala build failed :("
-  exit 1
-fi
 
 $GRUNT_HOME/bin/compile $1 $2
 if [ "$?" != "0" ]; then
   echo "grunt build failed :("
   exit 1
 fi
+
+$SCALA_HOME/bin/compile $1 $2
+if [ "$?" != "0" ]; then
+  echo "scala build failed :("
+  exit 1
+fi
+
 
 
 
