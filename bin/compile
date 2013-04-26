@@ -4,6 +4,8 @@
 # Fail soon
 set -e
 
+CODE_HOME=$(pwd)
+
 BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
 SCALA_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-scala"
 GRUNT_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-grunt"
@@ -18,13 +20,13 @@ if [ ! -d $SCALA_HOME ]; then
   exit 1
 fi
 
-$(cd $SCALA_HOME; bin/compile $1 $2)
+$($SCALA_HOME/bin/compile $1 $2)
 if [ "$?" != "0" ]; then
   echo "scala build failed :("
   exit 1
 fi
 
-$(cd $GRUNT_HOME; bin/compile $1 $2)
+$($GRUNT_HOME/bin/compile $1 $2)
 if [ "$?" != "0" ]; then
   echo "grunt build failed :("
   exit 1
