@@ -1,0 +1,33 @@
+#!/bin/bash
+
+BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
+
+
+mkdir subpacks
+cd subpacks
+
+git clone https://github.com/baloo/heroku-buildpack-grunt.git
+git clone https://github.com/heroku/heroku-buildpack-scala.git
+
+heroku-buildpack-scala/bin/detect | tr -d '\n'
+SCALA_RETURN=$?
+
+if [ "$SCALA_RETURN" != "0" ]; then
+  echo "Not a scala project zomfg"
+  exit 1
+fi
+
+echo -n " & "
+
+heroku-buildpack-grunt/bin/detect | tr -d '\n'
+GRUNT_RETURN=$?
+
+if [ "$GRUNT_RETURN" != "0" ]; then
+  echo "Not a grunt project zomfg"
+  exit 1
+fi
+
+
+exit 0
+
+

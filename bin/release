@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+
+BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
+SCALA_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-scala"
+
+
+exec $SCALA_HOME/bin/release $1
+

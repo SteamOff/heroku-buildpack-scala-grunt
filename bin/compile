@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# Fail soon
+set -e
+
+BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
+SCALA_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-scala"
+GRUNT_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-grunt"
+
+if [ ! -d $GRUNT_HOME ]; then
+  echo "Zomfg! something got wrong, we don't have the grunt buildpack :("
+  exit 1
+fi
+
+if [ ! -d $SCALA_HOME ]; then
+  echo "Zomfg! something got wrong, we don't have the scala buildpack :("
+  exit 1
+fi
+
+$(cd SCALA_HOME; bin/compile $1 $2)
+if [ "$?" != "0" ]; then
+  echo "scala build failed :("
+  exit 1
+fi
+
+$(cd GRUNT_HOME; bin/compile $1 $2)
+if [ "$?" != "0" ]; then
+  echo "grunt build failed :("
+  exit 1
+fi
+
+
+
+
+
