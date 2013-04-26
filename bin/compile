@@ -21,7 +21,7 @@ if [ ! -d $SCALA_HOME ]; then
 fi
 
 if [ -e "$1/package.json" ]; then
-  $GRUNT_HOME/bin/compile $2 $2
+  $GRUNT_HOME/bin/compile $1 $2
   if [ "$?" != "0" ]; then
     echo "grunt build failed :("
     exit 1
