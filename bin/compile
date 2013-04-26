@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-set -x
 # Fail soon
 set -e
 
 BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
-find $BUILDPACK_HOME
 SCALA_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-scala"
 GRUNT_HOME="$BUILDPACK_HOME/subpacks/heroku-buildpack-grunt"
 
